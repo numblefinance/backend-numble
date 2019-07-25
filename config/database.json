@@ -1,0 +1,50 @@
+{
+	"development": {
+		"db": {
+			"username": "admin",
+			"password": "admin",
+			"database": "nimble",
+			"host": "127.0.0.1",
+			"dialect": "postgres",
+			"operatorsAliases": false,
+			"define": {
+				"timestamps": true,
+				"paranoid": true
+			},
+			"logging": false
+		},
+		"port": 3000
+	},
+	"staging": {
+		"db": {
+			"username": "postgres",
+			"password": "postgres",
+			"database": "nimble",
+			"host": "127.0.0.1",
+			"dialect": "postgres",
+			"operatorsAliases": false,
+			"define": {
+				"timestamps": true,
+				"paranoid": true
+			},
+			"logging": true
+		},
+		"port": 3000
+	},
+	"production": {
+		"db": {
+			"username": "",
+			"password": "",
+			"database": "",
+			"host": "",
+			"dialect": "postgres",
+			"operatorsAliases": false,
+			"define": {
+				"timestamps": true,
+				"paranoid": true
+			},
+			"logging": true
+		},
+		"port": 3000
+	}
+}
