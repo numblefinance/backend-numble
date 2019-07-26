@@ -21,14 +21,7 @@ module.exports = function (sequelize, DataTypes) {
 	var Main = sequelize.define('Main', attributes);
  
 
-	Main.login = function (main) {
-		return Main.find({
-			attributes: ['id', 'mainname', 'hash', 'salt', 'type', 'active', 'blocked', 'quizReady'],
-			where: {
-				mainname: main
-			}
-		});
-	};
+ 
 
  
 

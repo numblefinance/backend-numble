@@ -3,8 +3,8 @@ var router = express.Router();
 var Main = require('./../models').Main;
 
 router.route('/')
-	.get(function (req, res) {
-		Main.findActiveMains().then(function (result) {
+	.get(function (req, res) { 
+		Main.findAll().then(function (result) {
 			res.status(200).send(result);
 		}, function (err) {
 			res.status(500).send({ message: 'There was a problem getting the mains', err: err });
