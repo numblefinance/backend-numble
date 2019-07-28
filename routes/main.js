@@ -3,7 +3,7 @@ var router = express.Router();
 var Main = require('./../models').Main;
 
 router.route('/')
-	.get(function (req, res) { 
+	.get(function (req, res) {
 		Main.findAll().then(function (result) {
 			res.status(200).send(result);
 		}, function (err) {
@@ -35,4 +35,18 @@ router.route('/:id')
 		});
 	});
 
+
+router.route('/comun/:comun')
+	.get(function (req, res) {
+		Main.findAll({
+			where: {
+				comun: req.params.comun
+			},
+			attributes: { exclude: ['hash', 'salt'] } 	
+		}).then(function (result) {
+			res.send(result);
+		}, function (err) {
+			res.status(404).send({ message: "This main doesn't exist", err: err });
+		});
+	});
 module.exports = router;
