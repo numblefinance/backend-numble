@@ -4,13 +4,28 @@ var User = require('./../models').User;
 
 router.route('/')
 	.get(function (req, res) {
-		User.findActiveUsers().then(function (result) {
+		User.findAll().then(function (result) {
 			res.status(200).send(result);
 		}, function (err) {
 			res.status(500).send({ message: 'There was a problem getting the users', err: err });
 		});
 	});
-
+router.route('/login')
+	.get(function (req, res) {
+		User.login(req.body).then(function (result) {
+			res.status(200).send(result);
+		}, function (err) {
+			res.status(500).send({ message: 'There was a problem getting the users', err: err });
+		});
+	});
+router.route('/register')
+	.get(function (req, res) {
+		User.create(req.body).then(function (result) {
+			res.status(200).send(result);
+		}, function (err) {
+			res.status(500).send({ message: 'There was a problem getting the users', err: err });
+		});
+	});
 router.route('/:id')
 	.get(function (req, res) {
 		User.findById(req.params.id, {

@@ -22,8 +22,7 @@ module.exports = function (sequelize, DataTypes) {
  
 
 	User.login = function (user) {
-		return User.find({
-			attributes: ['id', 'username', 'hash', 'salt', 'type', 'active', 'blocked', 'quizReady'],
+		return User.find({ 
 			where: {
 				username: user
 			}
