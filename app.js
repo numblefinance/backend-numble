@@ -28,12 +28,7 @@ app.options('/*', function (req, res, next) {
 // development only
 if (ENV === 'development') {
 	app.use(errorHandler());
-}
-
-console.log('Environment: ' + config.port);
-console.dir(config);	
-console.log('Express server listening on port ' + app.get('port'));
-
+} 
 
 db.sequelize.sync().then(function () {
 	console.log('Connected to database');

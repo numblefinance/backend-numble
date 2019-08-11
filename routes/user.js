@@ -12,18 +12,18 @@ router.route('/')
 	});
 router.route('/login')
 	.get(function (req, res) {
-		User.login(req.body).then(function (result) {
+		User.login(req.body.user).then(function (result) {
 			res.status(200).send(result);
 		}, function (err) {
-			res.status(500).send({ message: 'There was a problem getting the users', err: err });
+			res.status(500).send({ message: 'There was a problem login the users', err: err });
 		});
 	});
 router.route('/register')
-	.get(function (req, res) {
-		User.create(req.body).then(function (result) {
+	.post(function (req, res) {
+		User.create(req.body.user).then(function (result) {
 			res.status(200).send(result);
 		}, function (err) {
-			res.status(500).send({ message: 'There was a problem getting the users', err: err });
+			res.status(500).send({ message: 'There was a problem create the users', err: err });
 		});
 	});
 router.route('/:id')

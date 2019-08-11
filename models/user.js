@@ -12,19 +12,20 @@ module.exports = function (sequelize, DataTypes) {
 		firstName: DataTypes.STRING,
 		lastName: DataTypes.STRING,
 		email: {
-			type: DataTypes.STRING,
-			unique: 'compositeIndex'
+			type: DataTypes.STRING
 		}, 
+		type: DataTypes.STRING,
 		deletedAt: DataTypes.DATE
 	};
 
 	var User = sequelize.define('User', attributes);
  
 
-	User.login = function (user) {
-		return User.find({ 
+	User.login = function (body) {
+		return User.findAll({ 
 			where: {
-				username: user
+				username: body.username,
+				password: body.password
 			}
 		});
 	};
