@@ -11,7 +11,7 @@ router.route('/')
 		});
 	});
 router.route('/login')
-	.get(function (req, res) {
+	.post(function (req, res) {
 		User.login(req.body.user).then(function (result) {
 			res.status(200).send(result);
 		}, function (err) {

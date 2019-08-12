@@ -42,11 +42,20 @@ router.route('/comun/:comun')
 			where: {
 				comun: req.params.comun
 			},
-			attributes: { exclude: ['hash', 'salt'] } 	
+			attributes: { exclude: ['hash', 'salt'] }
 		}).then(function (result) {
 			res.send(result);
 		}, function (err) {
 			res.status(404).send({ message: "This main doesn't exist", err: err });
 		});
 	});
+router.route('/uploadCSV')
+	.post(function (req, res) {
+		Main.uploadCSV(req.body.regis).then(function (result) { 
+			res.status(200).send(result); 
+		}, function (err) {
+			res.status(500).send({ message: 'There was a problem login the upload', err: err });
+		});
+	});
+
 module.exports = router;
