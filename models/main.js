@@ -29,10 +29,18 @@ module.exports = function (sequelize, DataTypes) {
 				Main.findOne({ where: { ticker: element.ticker }, attributes: ['id'] }).then(project => {
 					if (project) {
 						countUpdate++;
-						Main.update(element
+						Main.update({
+							company: element.company,
+							count: element.count,
+							graph1: element.graph1,
+							graph2: element.graph2,
+							description: element.description,
+							comun: element.comun,
+							url: element.url
+						}
 							, {
 								where: {
-									id: element.id
+									ticker: element.ticker
 								}
 							});
 					} else {
@@ -41,9 +49,9 @@ module.exports = function (sequelize, DataTypes) {
 					}
 					if (regis.length == countInsert + countUpdate) {
 						let response = {
-							countUpdate: countUpdate,   
+							countUpdate: countUpdate,
 							countInsert: countInsert
-						}   
+						}
 						resolve(response);
 					}
 				})
