@@ -19,7 +19,10 @@ module.exports = function (sequelize, DataTypes) {
 	};
 
 	var Main = sequelize.define('Main', attributes);
-
+	Main.associate = function (models) {
+		Main.hasMany(models.Comment);
+	};
+	
 	Main.uploadCSV = function (regis) {
 		return new Promise((resolve, reject) => {
 			let countUpdate = 0;

@@ -8,6 +8,8 @@ module.exports = function (sequelize, DataTypes) {
 
 	var attributes = {
 		comment: DataTypes.TEXT,
+		idUser:DataTypes.INTEGER,
+		idCompany:DataTypes.INTEGER,
 		deletedAt: DataTypes.DATE
 	};
 

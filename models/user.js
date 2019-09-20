@@ -19,7 +19,10 @@ module.exports = function (sequelize, DataTypes) {
 	};
 
 	var User = sequelize.define('User', attributes);
- 
+	User.associate = function (models) {
+		User.hasMany(models.Comment);
+	};
+	
 
 	User.login = function (body) {
 		return User.findAll({ 
