@@ -37,13 +37,13 @@ router.route('/:id')
 		});
 	})
 	.patch(function (req, res) {
-		User.update(req.body, {
+		User.update(req.body.user, {
 			where: {
 				id: req.params.id
 			}
-		}).then(function (result) {
+		}).then(function (result) { 
 			if (result[0] === 1) {
-				res.status(204).send();
+				res.status(200).send({status:'Update'});
 			} else {
 				res.status(404).send({ message: "This user doesn't exist" });
 			}
