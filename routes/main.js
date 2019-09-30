@@ -10,6 +10,14 @@ router.route('/')
 			res.status(500).send({ message: 'There was a problem getting the mains', err: err });
 		});
 	});
+router.route('/create')
+	.post(function (req, res) {
+		Main.create(req.body.company).then(function (result) {
+			res.status(200).send(result);
+		}, function (err) {
+			res.status(500).send({ message: 'There was a problem create the company', err: err });
+		});
+	});
 
 router.route('/:id')
 	.get(function (req, res) {
@@ -22,7 +30,7 @@ router.route('/:id')
 		});
 	})
 	.patch(function (req, res) {
-		Main.update(req.body, {
+		Main.update(req.body.company, {
 			where: {
 				id: req.params.id
 			}
@@ -51,8 +59,8 @@ router.route('/comun/:comun')
 	});
 router.route('/uploadCSV')
 	.post(function (req, res) {
-		Main.uploadCSV(req.body.regis).then(function (result) { 
-			res.status(200).send(result); 
+		Main.uploadCSV(req.body.regis).then(function (result) {
+			res.status(200).send(result);
 		}, function (err) {
 			res.status(500).send({ message: 'There was a problem login the upload', err: err });
 		});
