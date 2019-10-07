@@ -4,7 +4,10 @@ var Main = require('./../models').Main;
 
 router.route('/')
 	.get(function (req, res) {
-		Main.findAll().then(function (result) {
+		Main.findAll({ 
+			order: [ 
+				['ticker', 'ASC']
+			]}).then(function (result) {
 			res.status(200).send(result);
 		}, function (err) {
 			res.status(500).send({ message: 'There was a problem getting the mains', err: err });
