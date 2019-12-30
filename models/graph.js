@@ -22,5 +22,48 @@ module.exports = function (sequelize, DataTypes) {
 
 	var Graph = sequelize.define('Graph', attributes);
 
+	Graph.uploadCSV = function (regis) {
+		return new Promise((resolve, reject) => {
+			let countUpdate = 0;
+			let countInsert = 0
+			regis.shift();
+			regis.forEach(element => {
+				Graph.findOne({ where: { ticker: element.ticker }, attributes: ['id'] }).then(project => {
+					if (project) {
+						countUpdate++;
+						Graph.update({
+							ticker: element.ticker,
+							year: element.year,
+							revenue: element.revenue,
+							costRevenue: element.costRevenue,
+							grossProfit: element.grossProfit,
+							research: element.research,
+							selling: element.selling,
+							other: element.other,
+							incomeTax: element.incomeTax,
+							netIncome: element.netIncome,
+							company: element.company
+						}
+							, {
+								where: {
+									ticker: element.ticker
+								}
+							});
+					} else {
+						countInsert++;
+						Graph.create(element);
+					}
+					if (regis.length == countInsert + countUpdate) {
+						let response = {
+							countUpdate: countUpdate,
+							countInsert: countInsert
+						}
+						resolve(response);
+					}
+				})
+			});
+		})
+	};
+
 	return Graph;
 };
